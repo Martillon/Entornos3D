@@ -21,15 +21,25 @@ public class ThirdPersonCam : MonoBehaviour
 
     private void Update()
     {
-        Vector3 viewDir = player.position -
-                          new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        // Calcula la dirección de vista del jugador hacia la cámara
+        Vector3 viewDir = player.position - transform.position;
         orientation.forward = viewDir.normalized;
 
+        // Obtiene las entradas de los ejes horizontal y vertical
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+        // Calcula la dirección de entrada combinando la dirección hacia adelante y hacia la derecha de la orientación
         Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if (inputDir != Vector3.zero)
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.fixedTime * rotationSpeed);
+        // Si hay una entrada no nula, realiza la rotación del jugador
+        if (inputDir.magnitude > 0.1f)
+        {
+            // Calcula la rotación objetivo basada en la dirección de entrada
+            Quaternion targetRotation = Quaternion.LookRotation(inputDir, Vector3.up);
+
+            // Aplica una rotación suavizada al jugador
+            playerObj.rotation = Quaternion.Slerp(playerObj.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 }
