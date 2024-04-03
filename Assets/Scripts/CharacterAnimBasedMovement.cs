@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,19 @@ public class CharacterAnimBasedMovement : MonoBehaviour
     public string mirrorIdleParam ="mirrorIdle";
 
     public string turn180Param = "turn180";
+    public string IsJumpingParam = "IsJumping";
+    public string IsGroundedParam = "IsGrounded";
+    public string JumpParam = "Jump";
+     
+
+   
+
+    public Rigidbody rb;
+    public float Jumpforce=8f;
+    public bool puedosaltar;
+
+
+    
 
     [Header("Animation Smoothing")]
     [Range(0, 1f)]
@@ -37,11 +51,18 @@ public class CharacterAnimBasedMovement : MonoBehaviour
 
     private bool turn180;
 
+    private bool IsJumping;
+    private bool IsGrounded;
+ 
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        rb=GetComponent<Rigidbody>();
         charactercontroller=GetComponent<CharacterController>();
+        puedosaltar=false;
         animator=GetComponent<Animator>();
         Cursor.visible=false;
         Cursor.lockState=CursorLockMode.Locked;
@@ -51,6 +72,7 @@ public class CharacterAnimBasedMovement : MonoBehaviour
     public void moveCharacter(float hInput,float vInput,Camera cam,bool jump,bool dash){
 
         //Calculate Input Magnitude
+        jump=false;
         Speed = new Vector2(hInput, vInput).normalized.sqrMagnitude;
 
         if(Speed >= Speed-rotationThreshold && dash){
@@ -93,6 +115,15 @@ public class CharacterAnimBasedMovement : MonoBehaviour
             //Stop the character
             animator.SetFloat(motionParam, Speed, StopAnimTime, Time.deltaTime);
         }
+
+        if (jump)
+        {
+            animator.SetBool(JumpParam, true);
+        }
+        else
+        {
+            animator.SetBool(JumpParam, false);
+        }
     }
 
     private void OnAnimatorIK(int layerIndex) {
@@ -112,4 +143,5 @@ public class CharacterAnimBasedMovement : MonoBehaviour
         }
 
     }
+
 }

@@ -29,6 +29,6 @@ public struct InputData{
 
         //Extra movement
         dash=Input.GetButton("Dash");
-        jump=Input.GetButton("Jump");
+        jump=Input.GetButtonDown("Jump");
     }
 }
