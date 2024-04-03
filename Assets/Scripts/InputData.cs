@@ -17,6 +17,7 @@ public struct InputData{
     //Extra Movement
     public bool dash;
     public bool jump;
+    public bool dance;
 
     public void getInput(){
         //Basic Movement
@@ -28,7 +29,8 @@ public struct InputData{
         horizontalMouse = Input.GetAxis("Mouse X");
 
         //Extra movement
-        dash=Input.GetButton("Dash");
-        jump=Input.GetButtonDown("Jump");
+        dash = Input.GetButton("Dash");
+        jump = Input.GetButtonDown("Jump");
+        dance = Input.GetButton("Dance");
     }
 }

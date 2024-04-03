@@ -8,7 +8,7 @@ public class PlayerTPSController : MonoBehaviour
         private InputData input;
         private CharacterAnimBasedMovement characterMovement;
     
-        public bool onInteractionZone{get;set; }
+        public bool onInteractionZone{get;set;}
         // Start is called before the first frame update
         void Start()
         {
@@ -20,7 +20,7 @@ public class PlayerTPSController : MonoBehaviour
         void Update()
         {
             input.getInput();
-            characterMovement.moveCharacter(input.hMovement, input.vMovement, cam, input.jump, input.dash);
+            characterMovement.MoveCharacter(input.hMovement, input.vMovement, cam, input.jump, input.dash, input.dance);
         }
 
 }
