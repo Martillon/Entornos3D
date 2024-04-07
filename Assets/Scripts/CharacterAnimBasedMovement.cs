@@ -19,8 +19,6 @@ public class CharacterAnimBasedMovement : MonoBehaviour
     public string mirrorIdleParam = "mirrorIdle";
 
     public string turn180Param = "turn180";
-    public string IsJumpingParam = "IsJumping";
-    public string IsGroundedParam = "IsGrounded";
     public string JumpParam = "Jump";
     public string DanceParam = "Dance";
 
@@ -65,7 +63,6 @@ public class CharacterAnimBasedMovement : MonoBehaviour
     {
 
         //Calculate Input Magnitude
-        jump = false;
         Speed = new Vector2(hInput, vInput).normalized.sqrMagnitude;
 
         if (Speed >= Speed - rotationThreshold && dash)

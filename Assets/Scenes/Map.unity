@@ -304,8 +304,6 @@ MonoBehaviour:
   motionParam: motion
   mirrorIdleParam: mirrorIdle
   turn180Param: turn180
-  IsJumpingParam: IsJumping
-  IsGroundedParam: IsGrounded
   JumpParam: Jump
   DanceParam: Dance
   rb: {fileID: 259636860}
@@ -1289,7 +1287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164872399}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.22975291, y: -0.000000016746096, z: -0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: -0.22975291, y: 0.000000016746089, z: 0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
