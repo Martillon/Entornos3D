@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,11 @@ public class PlayerTPSController : MonoBehaviour
     public Camera cam;
         private InputData input;
         private CharacterAnimBasedMovement characterMovement;
-    
-        public bool onInteractionZone{get;set;}
-        // Start is called before the first frame update
+
+        public bool blockInput { get; set; }
+        public bool onInteractionZone { get; set; }
+
+        public static event Action OnInteractionInput;
         void Start()
         {
             characterMovement=GetComponent<CharacterAnimBasedMovement>();
@@ -19,8 +22,12 @@ public class PlayerTPSController : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-            input.getInput();
-            characterMovement.MoveCharacter(input.hMovement, input.vMovement, cam, input.jump, input.dash, input.dance);
+            if(blockInput) input.ResetInput();
+            else input.getInput();
+
+            if (onInteractionZone && input.jump) OnInteractionInput?.Invoke();
+            else characterMovement.MoveCharacter(input.hMovement, input.vMovement, cam, input.jump, input.dash, input.dance);
+            
         }
 
 }

@@ -33,4 +33,11 @@ public struct InputData{
         jump = Input.GetButtonDown("Jump");
         dance = Input.GetButton("Dance");
     }
+
+    public void ResetInput()
+    {
+        verticalMouse = horizontalMouse = hMovement = vMovement = 0;
+
+        dash = jump = dance = false;
+    }
 }
